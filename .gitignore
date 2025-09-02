@@ -2,7 +2,17 @@
 venv
 /venv
 
+*./venv
+*venv
+*/venv
+
 
 .xlsx
 ./xlsx
 xlsx
+*.xls
+*.xlsx
+*.xlsm
+*.xlsb
+*.xltx
+*.xltm
