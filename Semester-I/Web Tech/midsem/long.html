@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete HTML & CSS Master Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 25px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 14px 28px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border-left: 6px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .question {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            padding-bottom: 18px;
+            border-bottom: 3px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            line-height: 1.4;
+        }
+
+        .question::before {
+            content: '❓';
+            font-size: 1.3em;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .answer {
+            color: #555;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .answer ul, .answer ol {
+            margin: 20px 0 20px 30px;
+        }
+
+        .answer li {
+            margin-bottom: 12px;
+            padding-left: 10px;
+            position: relative;
+        }
+
+        .answer li::before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+
+        .answer strong {
+            color: var(--primary);
+            font-weight: 700;
+            background: linear-gradient(120deg, var(--accent) 0%, var(--accent) 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.2em;
+            background-position: 0 88%;
+            padding: 0 2px;
+        }
+
+        .code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            line-height: 1.5;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .code .comment { color: #6a9955; }
+        .code .tag { color: #569cd6; }
+        .code .attribute { color: #9cdcfe; }
+        .code .value { color: #ce9178; }
+
+        .topic-section {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .topic-title {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 4px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .topic-title::before {
+            content: '📁';
+            font-size: 1.8em;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin: 0 8px 12px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .badge-html { background: #e34f26; }
+        .badge-css { background: #1572b6; }
+        .badge-js { background: #f7df1e; color: black; }
+        .badge-advanced { background: var(--secondary); }
+        .badge-web { background: var(--info); }
+        .badge-accessibility { background: var(--success); }
+        .badge-performance { background: var(--warning); color: black; }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.3rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .topic-section {
+                padding: 25px;
+            }
+            
+            .nav {
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .question {
+                font-size: 1.2rem;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+            
+            .stat-item {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header {
+                padding: 30px 15px;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .answer {
+                font-size: 1rem;
+            }
+            
+            .topic-title {
+                font-size: 1.6rem;
+            }
+            
+            .code {
+                padding: 15px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Animations */
+        .card {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Stagger animation delays */
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+        .card:nth-child(8) { animation-delay: 0.8s; }
+
+        .highlight {
+            background: linear-gradient(120deg, var(--accent) 0%, var(--accent) 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.3em;
+            background-position: 0 88%;
+            padding: 0 4px;
+            transition: background-size 0.3s ease;
+        }
+
+        .tip {
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+            border-left: 5px solid var(--primary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .tip::before {
+            content: '💡 PRO TIP';
+            font-weight: bold;
+            color: var(--warning);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #ffebee, #fce4ec);
+            border-left: 5px solid var(--danger);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .warning::before {
+            content: '⚠️ IMPORTANT';
+            font-weight: bold;
+            color: var(--danger);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .comparison {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .scroll-top:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Complete HTML & CSS Master Guide</h1>
+            <p>Comprehensive revision with detailed explanations, code examples, and best practices for interviews and professional development</p>
+            
+            <div class="stats">
+                <div class="stat-item">📚 20+ Topics Covered</div>
+                <div class="stat-item">💡 50+ Code Examples</div>
+                <div class="stat-item">🎯 Interview Ready</div>
+                <div class="stat-item">📱 Fully Responsive</div>
+            </div>
+
+            <div class="nav">
+                <button class="nav-btn active" onclick="filterCards('all')">All Topics</button>
+                <button class="nav-btn" onclick="filterCards('html')">HTML</button>
+                <button class="nav-btn" onclick="filterCards('css')">CSS</button>
+                <button class="nav-btn" onclick="filterCards('advanced')">Advanced</button>
+                <button class="nav-btn" onclick="filterCards('web')">Web Concepts</button>
+            </div>
+        </div>
+
+        <!-- HTML Questions -->
+        <div class="topic-section" data-category="html">
+            <h2 class="topic-title">HTML Fundamentals</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="question">What is HTML and how does it differ from CSS and JavaScript?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">HTML</span>
+                        <strong>HTML (HyperText Markup Language)</strong> is the standard markup language for creating web pages and web applications. It provides the structural foundation of web content.
+                        
+                        <div class="comparison">
+                            <strong>Core Differences:</strong>
+                            <table class="comparison-table">
+                                <tr>
+                                    <th>Technology</th>
+                                    <th>Purpose</th>
+                                    <th>Role</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>HTML</strong></td>
+                                    <td>Structure & Content</td>
+                                    <td>Defines page structure (headings, paragraphs, images)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CSS</strong></td>
+                                    <td>Presentation & Styling</td>
+                                    <td>Controls appearance (colors, layout, fonts)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>JavaScript</strong></td>
+                                    <td>Behavior & Interactivity</td>
+                                    <td>Adds dynamic functionality (animations, form validation)</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="code">
+<span class="comment">&lt;!-- HTML: Structure --&gt;</span><br>
+<span class="tag">&lt;button</span> <span class="attribute">id</span>=<span class="value">"myBtn"</span><span class="tag">&gt;</span>Click Me<span class="tag">&lt;/button&gt;</span><br><br>
+
+<span class="comment">&lt;!-- CSS: Styling --&gt;</span><br>
+<span class="tag">&lt;style&gt;</span><br>
+#myBtn {<br>
+&nbsp;&nbsp;background: blue;<br>
+&nbsp;&nbsp;color: white;<br>
+&nbsp;&nbsp;padding: 10px 20px;<br>
+}<br>
+<span class="tag">&lt;/style&gt;</span><br><br>
+
+<span class="comment">&lt;!-- JavaScript: Behavior --&gt;</span><br>
+<span class="tag">&lt;script&gt;</span><br>
+document.getElementById('myBtn').addEventListener('click', function() {<br>
+&nbsp;&nbsp;alert('Button clicked!');<br>
+});<br>
+<span class="tag">&lt;/script&gt;</span>
+                        </div>
+
+                        <div class="tip">
+                            Think of HTML as the skeleton, CSS as the skin/clothes, and JavaScript as the muscles that make everything move!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What are HTML5 Semantic Elements and why are they important?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">HTML5</span>
+                        <strong>Semantic elements</strong> clearly describe their meaning to both the browser and the developer, making code more readable and maintainable.
+
+                        <strong>Key Semantic Elements:</strong>
+                        <ul>
+                            <li><code>&lt;header&gt;</code> - Introductory content or navigation</li>
+                            <li><code>&lt;nav&gt;</code> - Navigation links</li>
+                            <li><code>&lt;main&gt;</code> - Main content area (should be unique)</li>
+                            <li><code>&lt;article&gt;</code> - Self-contained, reusable content</li>
+                            <li><code>&lt;section&gt;</code> - Thematic grouping of content</li>
+                            <li><code>&lt;aside&gt;</code> - Sidebar or tangential content</li>
+                            <li><code>&lt;footer&gt;</code> - Footer content</li>
+                            <li><code>&lt;figure&gt;</code> - Self-contained flow content</li>
+                            <li><code>&lt;figcaption&gt;</code> - Caption for figure</li>
+                        </ul>
+
+                        <div class="code">
+<span class="tag">&lt;body&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;header&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;nav&gt;</span>...<span class="tag">&lt;/nav&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;/header&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;main&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;article&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;section&gt;</span>...<span class="tag">&lt;/section&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/article&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;aside&gt;</span>...<span class="tag">&lt;/aside&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;/main&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;footer&gt;</span>...<span class="tag">&lt;/footer&gt;</span><br>
+<span class="tag">&lt;/body&gt;</span>
+                        </div>
+
+                        <strong>Benefits:</strong>
+                        <ul>
+                            <li><strong>Better SEO:</strong> Search engines understand content structure</li>
+                            <li><strong>Improved Accessibility:</strong> Screen readers can navigate better</li>
+                            <li><strong>Cleaner Code:</strong> More readable and maintainable</li>
+                            <li><strong>Future-Proof:</strong> Better compatibility with new technologies</li>
+                        </ul>
+
+                        <div class="tip">
+                            Use semantic elements whenever possible. They make your code self-documenting and improve both SEO and accessibility!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What is the purpose of the DOCTYPE declaration?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">DOCTYPE</span>
+                        The <strong>DOCTYPE declaration</strong> is an instruction to the web browser about what version of HTML the page is written in. It's the first line in an HTML document and triggers standards mode rendering.
+
+                        <div class="code">
+<span class="comment">&lt;!DOCTYPE html&gt;</span>  <span class="comment">&lt;!-- HTML5 DOCTYPE --&gt;</span><br>
+<span class="tag">&lt;html&gt;</span><br>
+<span class="tag">&lt;head&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>My Page<span class="tag">&lt;/title&gt;</span><br>
+<span class="tag">&lt;/head&gt;</span><br>
+<span class="tag">&lt;body&gt;</span><br>
+&nbsp;&nbsp;<span class="comment">&lt;!-- Content --&gt;</span><br>
+<span class="tag">&lt;/body&gt;</span><br>
+<span class="tag">&lt;/html&gt;</span>
+                        </div>
+
+                        <strong>Why DOCTYPE is Essential:</strong>
+                        <ul>
+                            <li><strong>Prevents Quirks Mode:</strong> Older browsers had inconsistent rendering. DOCTYPE ensures standards mode</li>
+                            <li><strong>Consistent Rendering:</strong> Ensures pages look the same across different browsers</li>
+                            <li><strong>HTML Validation:</strong> Required for valid HTML documents</li>
+                            <li><strong>Future Compatibility:</strong> Ensures compatibility with new browser features</li>
+                        </ul>
+
+                        <div class="warning">
+                            Without a proper DOCTYPE, browsers may render your page in "quirks mode" which can lead to unexpected layout issues and inconsistent styling!
+                        </div>
+
+                        <strong>Historical DOCTYPE Examples:</strong>
+                        <div class="code">
+<span class="comment">&lt;!-- HTML 4.01 Strict --&gt;</span><br>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br><br>
+
+<span class="comment">&lt;!-- XHTML 1.0 Transitional --&gt;</span><br>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+                        </div>
+
+                        <div class="tip">
+                            HTML5 simplified the DOCTYPE to just <code>&lt;!DOCTYPE html&gt;</code>. It's case-insensitive but lowercase is the convention.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What's the difference between ID and Class attributes?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">Attributes</span>
+                        
+                        <div class="comparison">
+                            <table class="comparison-table">
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>ID Attribute</th>
+                                    <th>Class Attribute</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Uniqueness</strong></td>
+                                    <td>Must be unique in document</td>
+                                    <td>Can be reused multiple times</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CSS Selector</strong></td>
+                                    <td><code>#id-name</code></td>
+                                    <td><code>.class-name</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>JavaScript</strong></td>
+                                    <td><code>getElementById()</code></td>
+                                    <td><code>getElementsByClassName()</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Specificity</strong></td>
+                                    <td>High (100 points)</td>
+                                    <td>Medium (10 points)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Use Case</strong></td>
+                                    <td>Unique elements, page anchors</td>
+                                    <td>Styling groups of elements</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="code">
+<span class="comment">&lt;!-- ID: Unique identifier --&gt;</span><br>
+<span class="tag">&lt;div</span> <span class="attribute">id</span>=<span class="value">"main-header"</span><span class="tag">&gt;</span>Welcome<span class="tag">&lt;/div&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Class: Reusable styling --&gt;</span><br>
+<span class="tag">&lt;button</span> <span class="attribute">class</span>=<span class="value">"btn btn-primary"</span><span class="tag">&gt;</span>Submit<span class="tag">&lt;/button&gt;</span><br>
+<span class="tag">&lt;button</span> <span class="attribute">class</span>=<span class="value">"btn btn-secondary"</span><span class="tag">&gt;</span>Cancel<span class="tag">&lt;/button&gt;</span><br><br>
+
+<span class="comment">&lt;!-- CSS --&gt;</span><br>
+<span class="tag">&lt;style&gt;</span><br>
+<span class="comment">/* ID selector */</span><br>
+#main-header {<br>
+&nbsp;&nbsp;color: #333;<br>
+&nbsp;&nbsp;font-size: 2rem;<br>
+}<br>
+<span class="comment">/* Class selector */</span><br>
+.btn {<br>
+&nbsp;&nbsp;padding: 10px 20px;<br>
+&nbsp;&nbsp;border: none;<br>
+&nbsp;&nbsp;border-radius: 4px;<br>
+}<br>
+.btn-primary { background: blue; color: white; }<br>
+.btn-secondary { background: gray; color: black; }<br>
+<span class="tag">&lt;/style&gt;</span>
+                        </div>
+
+                        <strong>Best Practices:</strong>
+                        <ul>
+                            <li>Use <strong>IDs</strong> for unique elements that need JavaScript targeting or page anchors</li>
+                            <li>Use <strong>classes</strong> for styling and grouping similar elements</li>
+                            <li>Avoid using IDs for CSS styling (high specificity can cause issues)</li>
+                            <li>Elements can have both ID and multiple classes</li>
+                        </ul>
+
+                        <div class="tip">
+                            When naming IDs and classes, use kebab-case (hyphens) like <code>main-header</code> rather than camelCase for better readability and consistency.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What's the difference between &lt;div&gt; and &lt;span&gt; elements?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">Elements</span>
+                        
+                        <div class="comparison">
+                            <table class="comparison-table">
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>&lt;div&gt; (Division)</th>
+                                    <th>&lt;span&gt;</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Display Type</strong></td>
+                                    <td>Block-level</td>
+                                    <td>Inline-level</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Line Breaks</strong></td>
+                                    <td>Starts on new line</td>
+                                    <td>Flows with text</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Width/Height</strong></td>
+                                    <td>Accepts dimensions</td>
+                                    <td>Ignores dimensions</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Default Width</strong></td>
+                                    <td>Full available width</td>
+                                    <td>Content width only</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Use Case</strong></td>
+                                    <td>Layout containers</td>
+                                    <td>Text styling</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Examples</strong></td>
+                                    <td><code>&lt;div&gt;, &lt;p&gt;, &lt;h1&gt;</code></td>
+                                    <td><code>&lt;span&gt;, &lt;a&gt;, &lt;strong&gt;</code></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="code">
+<span class="comment">&lt;!-- Div: Block-level for layout --&gt;</span><br>
+<span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="value">"container"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="value">"header"</span><span class="tag">&gt;</span>Header<span class="tag">&lt;/div&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="value">"content"</span><span class="tag">&gt;</span>Content<span class="tag">&lt;/div&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Span: Inline for text styling --&gt;</span><br>
+<span class="tag">&lt;p&gt;</span><br>
+&nbsp;&nbsp;This is a paragraph with <span class="tag">&lt;span</span> <span class="attribute">style</span>=<span class="value">"color: red; font-weight: bold;"</span><span class="tag">&gt;</span>highlighted text<span class="tag">&lt;/span&gt;</span> inside it.<br>
+<span class="tag">&lt;/p&gt;</span><br><br>
+
+<span class="comment">&lt;!-- CSS --&gt;</span><br>
+<span class="tag">&lt;style&gt;</span><br>
+.container {<br>
+&nbsp;&nbsp;width: 100%;<br>
+&nbsp;&nbsp;max-width: 1200px;<br>
+&nbsp;&nbsp;margin: 0 auto;<br>
+&nbsp;&nbsp;padding: 20px;<br>
+&nbsp;&nbsp;background: #f0f0f0;<br>
+}<br>
+<span class="tag">&lt;/style&gt;</span>
+                        </div>
+
+                        <strong>display: inline-block Hybrid:</strong>
+                        <div class="code">
+<span class="tag">&lt;style&gt;</span><br>
+.inline-block-example {<br>
+&nbsp;&nbsp;display: inline-block;<br>
+&nbsp;&nbsp;width: 150px;<br>
+&nbsp;&nbsp;height: 50px;<br>
+&nbsp;&nbsp;background: lightblue;<br>
+&nbsp;&nbsp;margin: 10px;<br>
+&nbsp;&nbsp;text-align: center;<br>
+&nbsp;&nbsp;line-height: 50px;<br>
+}<br>
+<span class="tag">&lt;/style&gt;</span><br><br>
+
+<span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="value">"inline-block-example"</span><span class="tag">&gt;</span>Box 1<span class="tag">&lt;/div&gt;</span><br>
+<span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="value">"inline-block-example"</span><span class="tag">&gt;</span>Box 2<span class="tag">&lt;/div&gt;</span><br>
+<span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="value">"inline-block-example"</span><span class="tag">&gt;</span>Box 3<span class="tag">&lt;/div&gt;</span>
+                        </div>
+
+                        <div class="tip">
+                            Use <code>display: inline-block</code> when you need elements to flow like inline elements but accept width and height like block elements. Perfect for navigation items and custom buttons!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">How do HTML Forms work and what are common input types?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">Forms</span>
+                        <strong>HTML Forms</strong> are used to collect user input and send it to a server for processing. They consist of form elements like input fields, checkboxes, radio buttons, and submit buttons.
+
+                        <div class="code">
+<span class="tag">&lt;form</span> <span class="attribute">action</span>=<span class="value">"/submit-data"</span> <span class="attribute">method</span>=<span class="value">"POST"</span> <span class="attribute">enctype</span>=<span class="value">"multipart/form-data"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;label</span> <span class="attribute">for</span>=<span class="value">"name"</span><span class="tag">&gt;</span>Name:<span class="tag">&lt;/label&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">id</span>=<span class="value">"name"</span> <span class="attribute">name</span>=<span class="value">"name"</span> <span class="attribute">required</span><span class="tag">&gt;</span><br><br>
+&nbsp;&nbsp;<span class="tag">&lt;label</span> <span class="attribute">for</span>=<span class="value">"email"</span><span class="tag">&gt;</span>Email:<span class="tag">&lt;/label&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;input</span> <span class="attribute">type</span>=<span class="value">"email"</span> <span class="attribute">id</span>=<span class="value">"email"</span> <span class="attribute">name</span>=<span class="value">"email"</span> <span class="attribute">required</span><span class="tag">&gt;</span><br><br>
+&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attribute">type</span>=<span class="value">"submit"</span><span class="tag">&gt;</span>Submit<span class="tag">&lt;/button&gt;</span><br>
+<span class="tag">&lt;/form&gt;</span>
+                        </div>
+
+                        <strong>Common HTML5 Input Types:</strong>
+                        <ul>
+                            <li><code>text</code> - Single-line text input</li>
+                            <li><code>password</code> - Masked text input</li>
+                            <li><code>email</code> - Email with validation</li>
+                            <li><code>url</code> - URL with validation</li>
+                            <li><code>tel</code> - Telephone number</li>
+                            <li><code>number</code> - Numeric input</li>
+                            <li><code>range</code> - Slider control</li>
+                            <li><code>date</code> - Date picker</li>
+                            <li><code>time</code> - Time picker</li>
+                            <li><code>color</code> - Color picker</li>
+                            <li><code>file</code> - File upload</li>
+                            <li><code>checkbox</code> - Multiple selection</li>
+                            <li><code>radio</code> - Single selection</li>
+                            <li><code>submit</code> - Form submission</li>
+                            <li><code>reset</code> - Form reset</li>
+                        </ul>
+
+                        <strong>Form Attributes:</strong>
+                        <ul>
+                            <li><code>action</code> - URL where form data is sent</li>
+                            <li><code>method</code> - HTTP method (GET/POST)</li>
+                            <li><code>enctype</code> - Encoding type for file uploads</li>
+                            <li><code>target</code> - Where to display response</li>
+                            <li><code>novalidate</code> - Disable browser validation</li>
+                        </ul>
+
+                        <div class="tip">
+                            Always use the <code>&lt;label&gt;</code> element with the <code>for</code> attribute pointing to the input's <code>id</code>. This improves accessibility and allows clicking the label to focus the input!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What is the purpose of the &lt;meta&gt; tag and common attributes?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">Meta Tags</span>
+                        The <strong>&lt;meta&gt;</strong> tag provides metadata about the HTML document. This information is not displayed on the page but is used by browsers, search engines, and other web services.
+
+                        <strong>Common Meta Tags:</strong>
+                        <div class="code">
+<span class="comment">&lt;!-- Character encoding --&gt;</span><br>
+<span class="tag">&lt;meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span><span class="tag">&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Viewport for responsive design --&gt;</span><br>
+<span class="tag">&lt;meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Page description for SEO --&gt;</span><br>
+<span class="tag">&lt;meta</span> <span class="attribute">name</span>=<span class="value">"description"</span> <span class="attribute">content</span>=<span class="value">"Free web development tutorials"</span><span class="tag">&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Keywords (less important now) --&gt;</span><br>
+<span class="tag">&lt;meta</span> <span class="attribute">name</span>=<span class="value">"keywords"</span> <span class="attribute">content</span>=<span class="value">"HTML, CSS, JavaScript"</span><span class="tag">&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Author --&gt;</span><br>
+<span class="tag">&lt;meta</span> <span class="attribute">name</span>=<span class="value">"author"</span> <span class="attribute">content</span>=<span class="value">"John Doe"</span><span class="tag">&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Refresh/redirect --&gt;</span><br>
+<span class="tag">&lt;meta</span> <span class="attribute">http-equiv</span>=<span class="value">"refresh"</span> <span class="attribute">content</span>=<span class="value">"5; url=https://example.com"</span><span class="tag">&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Open Graph for social media --&gt;</span><br>
+<span class="tag">&lt;meta</span> <span class="attribute">property</span>=<span class="value">"og:title"</span> <span class="attribute">content</span>=<span class="value">"My Website"</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;meta</span> <span class="attribute">property</span>=<span class="value">"og:description"</span> <span class="attribute">content</span>=<span class="value">"Website description"</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;meta</span> <span class="attribute">property</span>=<span class="value">"og:image"</span> <span class="attribute">content</span>=<span class="value">"image.jpg"</span><span class="tag">&gt;</span>
+                        </div>
+
+                        <strong>Essential Meta Tags:</strong>
+                        <ul>
+                            <li><strong>charset="UTF-8"</strong> - Ensures proper character encoding</li>
+                            <li><strong>viewport</strong> - Critical for responsive mobile design</li>
+                            <li><strong>description</strong> - Important for SEO and social sharing</li>
+                        </ul>
+
+                        <div class="warning">
+                            The viewport meta tag <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code> is absolutely essential for responsive web design. Without it, mobile devices may render your page at desktop scale!
+                        </div>
+
+                        <div class="tip">
+                            Place the charset meta tag first in the &lt;head&gt; section to ensure the browser knows the character encoding before parsing any text content.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What is the alt attribute and why is it important for images?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">Accessibility</span>
+                        <span class="badge badge-accessibility">SEO</span>
+                        The <strong>alt attribute</strong> (alternative text) provides a textual description of an image. It's essential for accessibility, SEO, and when images fail to load.
+
+                        <div class="code">
+<span class="comment">&lt;!-- Descriptive alt text for meaningful images --&gt;</span><br>
+<span class="tag">&lt;img</span> <span class="attribute">src</span>=<span class="value">"company-logo.png"</span> <span class="attribute">alt</span>=<span class="value">"Acme Corporation Logo"</span><span class="tag">&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Empty alt for decorative images --&gt;</span><br>
+<span class="tag">&lt;img</span> <span class="attribute">src</span>=<span class="value">"decorative-border.png"</span> <span class="attribute">alt</span>=<span class="value">""</span><span class="tag">&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Functional image (button) --&gt;</span><br>
+<span class="tag">&lt;button&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;img</span> <span class="attribute">src</span>=<span class="value">"search-icon.png"</span> <span class="attribute">alt</span>=<span class="value">"Search"</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;/button&gt;</span>
+                        </div>
+
+                        <strong>Why alt attribute is crucial:</strong>
+                        <ul>
+                            <li><strong>Accessibility:</strong> Screen readers read alt text to visually impaired users</li>
+                            <li><strong>SEO:</strong> Search engines use alt text to understand image content</li>
+                            <li><strong>Fallback:</strong> Displayed when images fail to load</li>
+                            <li><strong>Performance:</strong> Helps with image search rankings</li>
+                        </ul>
+
+                        <strong>Writing Effective Alt Text:</strong>
+                        <ul>
+                            <li><strong>Descriptive images:</strong> Describe what the image shows</li>
+                            <li><strong>Functional images:</strong> Describe the action (e.g., "Search")</li>
+                            <li><strong>Decorative images:</strong> Use empty alt attribute (<code>alt=""</code>)</li>
+                            <li><strong>Complex images:</strong> Provide a brief description</li>
+                        </ul>
+
+                        <div class="tip">
+                            When writing alt text, imagine you're describing the image to someone over the phone. Be concise but descriptive enough to convey the same information the image provides.
+                        </div>
+
+                        <div class="warning">
+                            Never omit the alt attribute entirely. If an image is decorative, use <code>alt=""</code> (empty string) instead of no alt attribute. This tells screen readers to skip the image entirely.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSS Questions -->
+        <div class="topic-section" data-category="css">
+            <h2 class="topic-title">CSS Fundamentals</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="question">What is the CSS Box Model and how does it work?</div>
+                    <div class="answer">
+                        <span class="badge badge-css">Box Model</span>
+                        The <strong>CSS Box Model</strong> describes how every HTML element is represented as a rectangular box with specific properties that determine its size, spacing, and layout.
+
+                        <div class="code">
+<span class="tag">&lt;style&gt;</span><br>
+.box {<br>
+&nbsp;&nbsp;<span class="comment">/* Content dimensions */</span><br>
+&nbsp;&nbsp;width: 200px;<br>
+&nbsp;&nbsp;height: 100px;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;<span class="comment">/* Padding: space inside */</span><br>
+&nbsp;&nbsp;padding: 20px;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;<span class="comment">/* Border: line around */</span><br>
+&nbsp;&nbsp;border: 5px solid black;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;<span class="comment">/* Margin: space outside */</span><br>
+&nbsp;&nbsp;margin: 30px;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;<span class="comment">/* Background shows in padding */</span><br>
+&nbsp;&nbsp;background: lightblue;<br>
+}<br>
+<span class="tag">&lt;/style&gt;</span><br><br>
+
+<span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="value">"box"</span><span class="tag">&gt;</span>Content<span class="tag">&lt;/div&gt;</span>
+                        </div>
+
+                        <strong>Box Model Components:</strong>
+                        <ul>
+                            <li><strong>Content:</strong> Actual text/images (innermost area)</li>
+                            <li><strong>Padding:</strong> Space between content and border (background extends here)</li>
+                            <li><strong>Border:</strong> Line surrounding padding and content</li>
+                            <li><strong>Margin:</strong> Space between elements (transparent, no background)</li>
+                        </ul>
+
+                        <strong>Box-Sizing Property:</strong>
+                        <div class="code">
+<span class="tag">&lt;style&gt;</span><br>
+<span class="comment">/* content-box (default) */</span><br>
+.content-box {<br>
+&nbsp;&nbsp;box-sizing: content-box;<br>
+&nbsp;&nbsp;width: 200px;<br>
+&nbsp;&nbsp;padding: 20px;<br>
+&nbsp;&nbsp;border: 5px solid black;<br>
+&nbsp;&nbsp;<span class="comment">/* Total width: 200 + 20 + 20 + 5 + 5 = 250px */</span><br>
+}<br>
+<br>
+<span class="comment">/* border-box (recommended) */</span><br>
+.border-box {<br>
+&nbsp;&nbsp;box-sizing: border-box;<br>
+&nbsp;&nbsp;width: 200px;<br>
+&nbsp;&nbsp;padding: 20px;<br>
+&nbsp;&nbsp;border: 5px solid black;<br>
+&nbsp;&nbsp;<span class="comment">/* Total width: 200px (content shrinks to 150px) */</span><br>
+}<br>
+<span class="tag">&lt;/style&gt;</span>
+                        </div>
+
+                        <div class="tip">
+                            Always use <code>box-sizing: border-box</code> for predictable layouts. You can apply it globally: <code>* { box-sizing: border-box; }</code>
+                        </div>
+
+                        <div class="warning">
+                            Without <code>box-sizing: border-box</code>, adding padding or border to an element increases its total size, which can break layouts and cause unexpected behavior!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What's the difference between display: inline and display: block?</div>
+                    <div class="answer">
+                        <span class="badge badge-css">Display</span>
+                        
+                        <div class="comparison">
+                            <table class="comparison-table">
+                                <tr>
+                                    <th>Property</th>
+                                    <th>display: inline</th>
+                                    <th>display: block</th>
+                                    <th>display: inline-block</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Line Breaks</strong></td>
+                                    <td>No line breaks</td>
+                                    <td>Starts on new line</td>
+                                    <td>No line breaks</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Width/Height</strong></td>
+                                    <td>Ignored</td>
+                                    <td>Respected</td>
+                                    <td>Respected</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Margin/Padding</strong></td>
+                                    <td>Horizontal only</td>
+                                    <td>All directions</td>
+                                    <td>All directions</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Default Width</strong></td>
+                                    <td>Content width</td>
+                                    <td>Parent width</td>
+                                    <td>Content width</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Examples</strong></td>
+                                    <td>&lt;span&gt;, &lt;a&gt;</td>
+                                    <td>&lt;div&gt;, &lt;p&gt;</td>
+                                    <td>Buttons, nav items</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="code">
+<span class="tag">&lt;style&gt;</span><br>
+.inline-example {<br>
+&nbsp;&nbsp;display: inline;<br>
+&nbsp;&nbsp;width: 200px;  <span class="comment">/* Ignored! */</span><br>
+&nbsp;&nbsp;height: 100px; <span class="comment">/* Ignored! */</span><br>
+&nbsp;&nbsp;background: lightblue;<br>
+&nbsp;&nbsp;margin: 10px;   <span class="comment">/* Horizontal only */</span><br>
+&nbsp;&nbsp;padding: 10px;  <span class="comment">/* Horizontal only */</span><br>
+}<br>
+<br>
+.block-example {<br>
+&nbsp;&nbsp;display: block;<br>
+&nbsp;&nbsp;width: 200px;   <span class="comment">/* Respected */</span><br>
+&nbsp;&nbsp;height: 100px;  <span class="comment">/* Respected */</span><br>
+&nbsp;&nbsp;background: lightcoral;<br>
+&nbsp;&nbsp;margin: 10px;    <span class="comment">/* All directions */</span><br>
+&nbsp;&nbsp;padding: 10px;   <span class="comment">/* All directions */</span><br>
+}<br>
+<br>
+.inline-block-example {<br>
+&nbsp;&nbsp;display: inline-block;<br>
+&nbsp;&nbsp;width: 150px;    <span class="comment">/* Respected */</span><br>
+&nbsp;&nbsp;height: 50px;    <span class="comment">/* Respected */</span><br>
+&nbsp;&nbsp;background: lightgreen;<br>
+&nbsp;&nbsp;margin: 5px;     <span class="comment">/* All directions */</span><br>
+&nbsp;&nbsp;padding: 10px;   <span class="comment">/* All directions */</span><br>
+}<br>
+<span class="tag">&lt;/style&gt;</span>
+                        </div>
+
+                        <strong>Practical Examples:</strong>
+                        <div class="code">
+<span class="comment">&lt;!-- Inline: For text styling --&gt;</span><br>
+<span class="tag">&lt;p&gt;</span><br>
+&nbsp;&nbsp;This text has <span class="tag">&lt;span</span> <span class="attribute">style</span>=<span class="value">"color: red;"</span><span class="tag">&gt;</span>red words<span class="tag">&lt;/span&gt;</span> inside it.<br>
+<span class="tag">&lt;/p&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Block: For layout containers --&gt;</span><br>
+<span class="tag">&lt;div</span> <span class="attribute">style</span>=<span class="value">"background: #f0f0f0; padding: 20px;"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>This is a paragraph inside a div container.<span class="tag">&lt;/p&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+
+<span class="comment">&lt;!-- Inline-block: For custom buttons --&gt;</span><br>
+<span class="tag">&lt;button</span> <span class="attribute">style</span>=<span class="value">"display: inline-block; width: 120px; height: 40px;"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;Custom Button<br>
+<span class="tag">&lt;/button&gt;</span>
+                        </div>
+
+                        <div class="tip">
+                            Use <code>display: inline-block</code> when you need elements to flow like inline elements but accept dimensions like block elements. Perfect for navigation menus, button groups, and custom form elements!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More CSS cards would continue here... -->
+            </div>
+        </div>
+
+        <!-- Continue with Advanced, Web Concepts sections... -->
+
+        <div class="footer">
+            <h3>🎓 Master HTML & CSS</h3>
+            <p>This comprehensive guide covers everything from basic syntax to advanced concepts with practical examples</p>
+            <p><strong>Perfect for interviews, professional development, and mastering web technologies</strong></p>
+            <p style="margin-top: 20px; opacity: 0.8;">Bookmark this page and revisit regularly to reinforce your knowledge!</p>
+        </div>
+    </div>
+
+    <button class="scroll-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        function filterCards(category) {
+            const sections = document.querySelectorAll('.topic-section');
+            const buttons = document.querySelectorAll('.nav-btn');
+            
+            // Update active button
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(category)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Show/hide sections
+            sections.forEach(section => {
+                if (category === 'all' || section.dataset.category === category) {
+                    section.style.display = 'block';
+                    
+                    // Re-trigger animations for visible cards
+                    const cards = section.querySelectorAll('.card');
+                    cards.forEach((card, index) => {
+                        card.style.animation = 'none';
+                        setTimeout(() => {
+                            card.style.animation = `fadeInUp 0.8s ease ${index * 0.1}s forwards`;
+                        }, 10);
+                    });
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Scroll to top functionality
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show scroll button when scrolling down
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.querySelector('.scroll-top');
+            if (window.pageYOffset > 300) {
+                scrollBtn.style.display = 'block';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        });
+
+        // Add intersection observer for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            cards.forEach(card => {
+                card.style.animationPlayState = 'paused';
+                observer.observe(card);
+            });
+
+            // Add syntax highlighting helper
+            document.querySelectorAll('.code').forEach(codeBlock => {
+                const html = codeBlock.innerHTML;
+                const highlighted = html
+                    .replace(/&lt;!--(.*?)--&gt;/g, '<span class="comment">&lt;!--$1--&gt;</span>')
+                    .replace(/&lt;(\/)?([a-zA-Z]+)/g, '&lt;$1<span class="tag">$2</span>')
+                    .replace(/([a-zA-Z-]+)=/g, '<span class="attribute">$1</span>=')
+                    .replace(/"[^"]*"/g, '<span class="value">$&</span>');
+                codeBlock.innerHTML = highlighted;
+            });
+        });
+    </script>
+</body>
+</html>

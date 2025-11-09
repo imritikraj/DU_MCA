@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML & CSS Quick Revision</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .question {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .answer {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .answer ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .answer li {
+            margin-bottom: 5px;
+        }
+
+        .topic-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .topic-title {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f0f0f0;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .topic-section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .question {
+                font-size: 1rem;
+            }
+            
+            .answer {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Scroll animations */
+        .card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stagger animation delays */
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 HTML & CSS Quick Revision</h1>
+            <p>Short answers for 30-minute revision • Fully responsive</p>
+        </div>
+
+        <!-- HTML Questions -->
+        <div class="topic-section">
+            <h2 class="topic-title">HTML Fundamentals</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="question">What is HTML & difference from CSS/JS?</div>
+                    <div class="answer">
+                        HTML: Structure (skeleton)<br>
+                        CSS: Presentation (styling)<br>
+                        JavaScript: Behavior (interactivity)
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">HTML5 Semantic Elements</div>
+                    <div class="answer">
+                        &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;,<br>
+                        &lt;section&gt;, &lt;aside&gt;, &lt;footer&gt;<br>
+                        Provide meaning and structure
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">DOCTYPE Declaration Purpose</div>
+                    <div class="answer">
+                        Triggers standards mode in browsers<br>
+                        Prevents quirks mode<br>
+                        Essential for consistent rendering
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">ID vs Class Attributes</div>
+                    <div class="answer">
+                        ID: Unique identifier (#selector)<br>
+                        Class: Reusable group (.selector)<br>
+                        ID has higher CSS specificity
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">Div vs Span Elements</div>
+                    <div class="answer">
+                        Div: Block-level (new line)<br>
+                        Span: Inline-level (flows with text)<br>
+                        Div for layout, Span for text styling
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">HTML Forms & Input Types</div>
+                    <div class="answer">
+                        text, password, email, number, date<br>
+                        radio, checkbox, file, submit<br>
+                        Collects user input for server processing
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSS Questions -->
+        <div class="topic-section">
+            <h2 class="topic-title">CSS Fundamentals</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="question">CSS Box Model</div>
+                    <div class="answer">
+                        Content → Padding → Border → Margin<br>
+                        box-sizing: border-box includes padding+border in width/height
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">Display: Inline vs Block</div>
+                    <div class="answer">
+                        Inline: Flows with text, no width/height<br>
+                        Block: New line, accepts width/height<br>
+                        Inline-block: Hybrid of both
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">CSS Position Property</div>
+                    <div class="answer">
+                        static: Normal flow (default)<br>
+                        relative: Offset from normal position<br>
+                        absolute: Relative to positioned parent<br>
+                        fixed: Relative to viewport
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">Margin vs Padding</div>
+                    <div class="answer">
+                        Margin: Space between elements (outside)<br>
+                        Padding: Space inside element (around content)<br>
+                        Margin collapses, Padding doesn't
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">z-index Property</div>
+                    <div class="answer">
+                        Controls stacking order (depth)<br>
+                        Higher value = closer to user<br>
+                        Requires positioned element
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">CSS Specificity</div>
+                    <div class="answer">
+                        Inline > ID > Class > Element<br>
+                        Determines which styles apply when conflicts occur
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Topics -->
+        <div class="topic-section">
+            <h2 class="topic-title">Advanced Concepts</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="question">CSS Grid vs Flexbox</div>
+                    <div class="answer">
+                        Grid: 2D layout (rows + columns)<br>
+                        Flexbox: 1D layout (row OR column)<br>
+                        Use Grid for overall layout, Flexbox for components
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">Media Queries</div>
+                    <div class="answer">
+                        @media (min-width: 768px) { ... }<br>
+                        Adapt styles based on screen size<br>
+                        Essential for responsive design
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">CSS Preprocessors (SASS)</div>
+                    <div class="answer">
+                        Variables, nesting, mixins, functions<br>
+                        Better organization and maintainability<br>
+                        Compiles to regular CSS
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">Cross-Browser Compatibility</div>
+                    <div class="answer">
+                        Use CSS resets/normalize<br>
+                        Vendor prefixes (-webkit-, -moz-)<br>
+                        Feature detection with @supports
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">CSS Performance Optimization</div>
+                    <div class="answer">
+                        Minify CSS, Remove unused code<br>
+                        Critical CSS inlining<br>
+                        Efficient selectors, GPU animations
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">Web Accessibility</div>
+                    <div class="answer">
+                        Semantic HTML, ARIA attributes<br>
+                        Color contrast, Keyboard navigation<br>
+                        Screen reader compatibility
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Reference -->
+        <div class="topic-section">
+            <h2 class="topic-title">Quick Reference</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="question">CSS Units</div>
+                    <div class="answer">
+                        px: Absolute pixels<br>
+                        %: Relative to parent<br>
+                        em: Relative to font-size<br>
+                        rem: Relative to root font-size<br>
+                        vw/vh: Viewport dimensions
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">Common Breakpoints</div>
+                    <div class="answer">
+                        Mobile: < 768px<br>
+                        Tablet: 768px - 1024px<br>
+                        Desktop: > 1024px<br>
+                        Use mobile-first approach
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">CSS Selectors</div>
+                    <div class="answer">
+                        .class, #id, element<br>
+                        [attribute], :pseudo-class<br>
+                        ::pseudo-element, > child<br>
+                        + adjacent, ~ general sibling
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 Perfect for quick revision • 📱 Fully responsive • ⚡ 30-minute review</p>
+            <p>Keep this page bookmarked for quick reference!</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

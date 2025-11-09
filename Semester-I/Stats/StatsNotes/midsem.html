@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Statistics Notes - Responsive</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            opacity: 0.9;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            min-height: 800px;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: #f8f9fa;
+            padding: 20px 15px;
+            border-right: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a6491;
+            font-size: 1.4rem;
+        }
+        
+        .topic-list {
+            list-style: none;
+        }
+        
+        .topic-item {
+            margin-bottom: 8px;
+        }
+        
+        .topic-item a {
+            display: block;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #495057;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+            font-size: 0.95rem;
+        }
+        
+        .topic-item a:hover {
+            background: #e9ecef;
+            color: #2c3e50;
+            border-left-color: #4a6491;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 25px;
+            background: white;
+            overflow-x: auto;
+        }
+        
+        .topic-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .topic-title {
+            font-size: clamp(1.5rem, 3vw, 1.8rem);
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .subsection {
+            margin: 20px 0;
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 5px solid #4a6491;
+        }
+        
+        .subsection-title {
+            font-size: clamp(1.2rem, 2.5vw, 1.3rem);
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .definition {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .formula {
+            background: #fff3e0;
+            padding: 18px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Cambria Math', serif;
+            border-left: 4px solid #ff9800;
+            overflow-x: auto;
+        }
+        
+        .formula p {
+            margin: 8px 0;
+        }
+        
+        .example {
+            background: #f3e5f5;
+            padding: 18px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #9c27b0;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            min-width: 300px;
+        }
+        
+        th {
+            background: #4a6491;
+            color: white;
+            padding: 12px 10px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.9rem;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .highlight {
+            background: #fffacd;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .print-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .content-wrapper {
+                flex-direction: column;
+                min-height: auto;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 1000;
+                transform: translateX(-100%);
+                overflow-y: auto;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                padding: 20px 15px;
+                width: 100%;
+            }
+            
+            .subsection {
+                padding: 15px;
+            }
+            
+            .formula, .example, .definition {
+                padding: 15px;
+            }
+            
+            table {
+                font-size: 0.85rem;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 20px 15px;
+            }
+            
+            .main-content {
+                padding: 15px 10px;
+            }
+            
+            .topic-section {
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+            }
+            
+            .subsection {
+                padding: 12px;
+            }
+            
+            .formula, .example, .definition {
+                padding: 12px;
+            }
+            
+            table {
+                font-size: 0.8rem;
+            }
+            
+            th, td {
+                padding: 6px 4px;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .sidebar, .print-btn, .mobile-menu-btn {
+                display: none;
+            }
+            
+            .content-wrapper {
+                display: block;
+            }
+            
+            .topic-section {
+                page-break-inside: avoid;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4a6491;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="mobile-menu-btn" id="menuToggle">☰</button>
+            <h1>Complete Statistics Notes</h1>
+            <p class="subtitle">All Topics Covered - Fully Responsive Design</p>
+        </header>
+        
+        <div class="content-wrapper">
+            <aside class="sidebar" id="sidebar">
+                <h2>Topics</h2>
+                <ul class="topic-list">
+                    <li class="topic-item"><a href="#central-tendency">Central Tendency</a></li>
+                    <li class="topic-item"><a href="#dispersion">Dispersion & Variance</a></li>
+                    <li class="topic-item"><a href="#skewness">Skewness</a></li>
+                    <li class="topic-item"><a href="#probability">Probability</a></li>
+                    <li class="topic-item"><a href="#distributions">Distributions</a></li>
+                    <li class="topic-item"><a href="#sampling">Sampling & Populations</a></li>
+                    <li class="topic-item"><a href="#visualization">Data Visualization</a></li>
+                    <li class="topic-item"><a href="#random-variables">Random Variables</a></li>
+                    <li class="topic-item"><a href="#expectation">Expectation & Variance</a></li>
+                    <li class="topic-item"><a href="#attributes">Theory of Attributes</a></li>
+                </ul>
+            </aside>
+            
+            <main class="main-content">
+                <!-- Central Tendency -->
+                <section class="topic-section" id="central-tendency">
+                    <h2 class="topic-title">Measures of Central Tendency</h2>
+                    
+                    <div class="definition">
+                        <p>A <span class="highlight">measure of central tendency</span> is a value around which all the observations have a tendency to cluster.</p>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Arithmetic Mean</h3>
+                        <div class="formula">
+                            <p>Population Mean: \( \mu = \frac{\sum_{i=1}^{N} x_i}{N} \)</p>
+                            <p>Sample Mean: \( \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n} \)</p>
+                            <p>Weighted Mean: \( \bar{x}_w = \frac{\sum w_i x_i}{\sum w_i} \)</p>
+                        </div>
+                        
+                        <div class="example">
+                            <h4>Example: Weekly Pocket Money</h4>
+                            <table>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Mon</th>
+                                    <th>Tue</th>
+                                    <th>Wed</th>
+                                    <th>Thu</th>
+                                    <th>Fri</th>
+                                    <th>Sat</th>
+                                    <th>Sun</th>
+                                </tr>
+                                <tr>
+                                    <td>Money</td>
+                                    <td>10</td>
+                                    <td>15</td>
+                                    <td>5</td>
+                                    <td>10</td>
+                                    <td>15</td>
+                                    <td>20</td>
+                                    <td>60</td>
+                                </tr>
+                            </table>
+                            <p>Mean: \( \bar{x} = \frac{10+15+5+10+15+20+60}{7} = \frac{135}{7} \approx 19.29 \)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Median</h3>
+                        <div class="formula">
+                            <p>For odd n: \( \text{Median} = \left( \frac{n+1}{2} \right)^{th} \text{ term} \)</p>
+                            <p>For even n: \( \text{Median} = \frac{1}{2} \left[ \left( \frac{n}{2} \right)^{th} \text{ term} + \left( \frac{n}{2} + 1 \right)^{th} \text{ term} \right] \)</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Dispersion & Variance -->
+                <section class="topic-section" id="dispersion">
+                    <h2 class="topic-title">Measures of Dispersion & Variance</h2>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Variance</h3>
+                        <div class="formula">
+                            <p>Population Variance: \( \sigma^2 = \frac{\sum_{i=1}^{N} (x_i - \mu)^2}{N} \)</p>
+                            <p>Sample Variance: \( s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} \)</p>
+                        </div>
+                        
+                        <div class="definition">
+                            <p>Why n-1? Using \( n-1 \) (Bessel's correction) provides an unbiased estimator of population variance.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Standard Deviation</h3>
+                        <div class="formula">
+                            <p>Population: \( \sigma = \sqrt{\sigma^2} \)</p>
+                            <p>Sample: \( s = \sqrt{s^2} \)</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Skewness -->
+                <section class="topic-section" id="skewness">
+                    <h2 class="topic-title">Skewness</h2>
+                    
+                    <div class="definition">
+                        <p><span class="highlight">Skewness</span> measures the lack of symmetry in a distribution.</p>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Types of Skewness</h3>
+                        <div class="definition">
+                            <p><strong>Positive Skewness (Right-skewed):</strong> Mean > Median > Mode</p>
+                            <p><strong>Negative Skewness (Left-skewed):</strong> Mean < Median < Mode</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Probability -->
+                <section class="topic-section" id="probability">
+                    <h2 class="topic-title">Probability</h2>
+                    
+                    <div class="definition">
+                        <p><span class="highlight">Probability</span> is a mathematical model for quantifying uncertainty.</p>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Probability Rules</h3>
+                        <div class="formula">
+                            <p>\( 0 \leq P(A) \leq 1 \)</p>
+                            <p>\( P(S) = 1 \)</p>
+                            <p>\( P(A \cup B) = P(A) + P(B) - P(A \cap B) \)</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Distributions -->
+                <section class="topic-section" id="distributions">
+                    <h2 class="topic-title">Distributions</h2>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Normal Distribution</h3>
+                        <div class="definition">
+                            <p>Bell-shaped, symmetric distribution where:</p>
+                            <ul>
+                                <li>≈68% of data within μ ± σ</li>
+                                <li>≈95% of data within μ ± 2σ</li>
+                                <li>≈99.7% of data within μ ± 3σ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Sampling & Populations -->
+                <section class="topic-section" id="sampling">
+                    <h2 class="topic-title">Sampling & Populations</h2>
+                    
+                    <div class="definition">
+                        <p><span class="highlight">Population:</span> Complete collection of all items</p>
+                        <p><span class="highlight">Sample:</span> Subset of population</p>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Parameters vs Statistics</h3>
+                        <table>
+                            <tr>
+                                <th>Parameters (Population)</th>
+                                <th>Statistics (Sample)</th>
+                            </tr>
+                            <tr>
+                                <td>μ (mean)</td>
+                                <td>x̄ (mean)</td>
+                            </tr>
+                            <tr>
+                                <td>σ (standard deviation)</td>
+                                <td>s (standard deviation)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Data Visualization -->
+                <section class="topic-section" id="visualization">
+                    <h2 class="topic-title">Data Visualization</h2>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Stem and Leaf Plot</h3>
+                        <div class="example">
+                            <h4>Example: Phone Call Lengths (minutes)</h4>
+                            <table>
+                                <tr>
+                                    <th>Stem</th>
+                                    <th>Leaf</th>
+                                </tr>
+                                <tr>
+                                    <td>0</td>
+                                    <td>2, 3, 5, 6</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>0, 4, 9</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>3, 3</td>
+                                </tr>
+                            </table>
+                            <p>Key: 2|0 = 20 minutes</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Random Variables -->
+                <section class="topic-section" id="random-variables">
+                    <h2 class="topic-title">Random Variables</h2>
+                    
+                    <div class="definition">
+                        <p>A <span class="highlight">random variable</span> assigns numerical values to outcomes.</p>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Probability Distribution</h3>
+                        <div class="formula">
+                            <p>\( P(X = x_i) = p_i \) where \( \sum p_i = 1 \)</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Expectation & Variance -->
+                <section class="topic-section" id="expectation">
+                    <h2 class="topic-title">Expectation & Variance</h2>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Expected Value</h3>
+                        <div class="formula">
+                            <p>\( E(X) = \mu = \sum x_i \cdot P(X = x_i) \)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Variance of Random Variable</h3>
+                        <div class="formula">
+                            <p>\( \text{Var}(X) = E[(X - \mu)^2] = \sum (x_i - \mu)^2 \cdot P(X = x_i) \)</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Theory of Attributes -->
+                <section class="topic-section" id="attributes">
+                    <h2 class="topic-title">Theory of Attributes</h2>
+                    
+                    <div class="definition">
+                        <p>Deals with qualitative characteristics that can only be present or absent.</p>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Yule's Coefficient</h3>
+                        <div class="formula">
+                            <p>\( Q = \frac{(AB)(αβ) - (Aβ)(αB)}{(AB)(αβ) + (Aβ)(αB)} \)</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <button class="print-btn" onclick="window.print()">Print Notes</button>
+                <button class="print-btn">
+                    <a style="color: wheat;" href="index.html">Back to Home</a>
+                </button>
+            </main>
+        </div>
+    </div>
+    
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.topic-item a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('sidebar').classList.remove('active');
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

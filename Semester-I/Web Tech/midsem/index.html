@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML & CSS Revision Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            padding: 50px 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 20px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .versions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .version-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+        }
+
+        .version-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .version-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            border-color: var(--primary);
+        }
+
+        .version-card.featured {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .version-card.featured:hover {
+            transform: scale(1.08) translateY(-10px);
+        }
+
+        .version-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .version-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .version-time {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .version-description {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .version-features {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .version-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .version-features li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .version-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .feature-section {
+            background: white;
+            border-radius: 25px;
+            padding: 50px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .feature-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 20px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .feature-item h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .feature-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+        }
+
+        .footer h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.2rem;
+            }
+            
+            .versions-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .version-card.featured {
+                transform: none;
+            }
+            
+            .version-card.featured:hover {
+                transform: translateY(-10px);
+            }
+            
+            .feature-title {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                gap: 20px;
+            }
+            
+            .stat-item {
+                padding: 15px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .version-card {
+                padding: 30px 20px;
+            }
+            
+            .version-title {
+                font-size: 1.6rem;
+            }
+            
+            .feature-section {
+                padding: 30px 20px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Animations */
+        .version-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .version-card:nth-child(1) { animation-delay: 0.1s; }
+        .version-card:nth-child(2) { animation-delay: 0.3s; }
+        .version-card:nth-child(3) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 0.2s; }
+        .feature-item:nth-child(2) { animation-delay: 0.4s; }
+        .feature-item:nth-child(3) { animation-delay: 0.6s; }
+        .feature-item:nth-child(4) { animation-delay: 0.8s; }
+        .feature-item:nth-child(5) { animation-delay: 1.0s; }
+        .feature-item:nth-child(6) { animation-delay: 1.2s; }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 HTML & CSS Revision Hub</h1>
+            <p>Your complete guide to mastering web development fundamentals. Choose the perfect revision format for your needs - from quick refreshers to deep dives.</p>
+            
+            <div class="stats">
+                <div class="stat-item">📚 3 Complete Guides</div>
+                <div class="stat-item">💡 50+ Code Examples</div>
+                <div class="stat-item">🎯 Interview Ready</div>
+                <div class="stat-item">📱 Fully Responsive</div>
+            </div>
+        </div>
+
+        <!-- Version Selection -->
+        <div class="versions-grid">
+            <div class="version-card">
+                <div class="version-icon">⚡</div>
+                <div class="badge">Quick Revision</div>
+                <h2 class="version-title">Short Version</h2>
+                <div class="version-time">⏱️ 15-30 Minutes</div>
+                <p class="version-description">
+                    Perfect for last-minute revision before interviews or quick refreshers. Concise answers with key points.
+                </p>
+                
+                <div class="version-features">
+                    <ul>
+                        <li>Brief, to-the-point answers</li>
+                        <li>Essential concepts only</li>
+                        <li>Quick scanning format</li>
+                        <li>Mobile-optimized reading</li>
+                        <li>Perfect for interviews</li>
+                    </ul>
+                </div>
+                
+                <a href="short.html" class="btn">Open Short Guide</a>
+            </div>
+
+            <div class="version-card featured">
+                <div class="version-icon">🎯</div>
+                <div class="badge">Recommended</div>
+                <h2 class="version-title">Medium Version</h2>
+                <div class="version-time">⏱️ 30-60 Minutes</div>
+                <p class="version-description">
+                    Balanced approach with detailed explanations and code examples. Ideal for thorough revision.
+                </p>
+                
+                <div class="version-features">
+                    <ul>
+                        <li>Detailed explanations</li>
+                        <li>Practical code examples</li>
+                        <li>Best practices included</li>
+                        <li>Interview-focused content</li>
+                        <li>Interactive elements</li>
+                        <li>Category filtering</li>
+                    </ul>
+                </div>
+                
+                <a href="medium.html" class="btn">Open Medium Guide</a>
+            </div>
+
+            <div class="version-card">
+                <div class="version-icon">📚</div>
+                <div class="badge">Comprehensive</div>
+                <h2 class="version-title">Long Version</h2>
+                <div class="version-time">⏱️ 60+ Minutes</div>
+                <p class="version-description">
+                    Complete master guide with exhaustive explanations, advanced topics, and real-world scenarios.
+                </p>
+                
+                <div class="version-features">
+                    <ul>
+                        <li>Exhaustive coverage</li>
+                        <li>Advanced concepts</li>
+                        <li>Real-world examples</li>
+                        <li>Performance tips</li>
+                        <li>Accessibility guide</li>
+                        <li>SEO best practices</li>
+                        <li>Cross-browser solutions</li>
+                    </ul>
+                </div>
+                
+                <a href="long.html" class="btn">Open Complete Guide</a>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="feature-section">
+            <h2 class="feature-title">🌟 What You'll Master</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <h3>HTML5 Semantic Elements</h3>
+                    <p>Learn proper structure with header, nav, main, article, section, aside, and footer elements.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <h3>CSS Box Model & Layout</h3>
+                    <p>Master padding, margin, border, and modern layout techniques with Flexbox and Grid.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive Design</h3>
+                    <p>Create websites that work perfectly on all devices with media queries and mobile-first approach.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Performance Optimization</h3>
+                    <p>Learn techniques to make your websites faster and more efficient.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔍</div>
+                    <h3>CSS Specificity & Cascade</h3>
+                    <p>Understand how browsers determine which styles to apply and master CSS conflicts.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">♿</div>
+                    <h3>Web Accessibility</h3>
+                    <p>Build inclusive websites that work for everyone with proper ARIA and semantic HTML.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Start -->
+        <div class="feature-section">
+            <h2 class="feature-title">🚀 Quick Start Guide</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>For Interviews</h3>
+                    <p>Start with <strong>Short Version</strong> for quick concept review, then use <strong>Medium Version</strong> for detailed preparation.</p>
+                    <a href="short.html" class="btn btn-outline" style="margin-top: 15px;">Short Guide</a>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>For Learning</h3>
+                    <p>Use <strong>Medium Version</strong> for balanced learning, then <strong>Long Version</strong> for deep understanding.</p>
+                    <a href="medium.html" class="btn btn-outline" style="margin-top: 15px;">Medium Guide</a>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>For Mastery</h3>
+                    <p>Go through <strong>Long Version</strong> for comprehensive knowledge and advanced techniques.</p>
+                    <a href="long.html" class="btn btn-outline" style="margin-top: 15px;">Complete Guide</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3>🎓 Start Your Revision Journey</h3>
+            <p>Whether you're preparing for interviews, brushing up on fundamentals, or mastering advanced concepts, we've got the perfect guide for you.</p>
+            <p><strong>Choose your path and become a web development expert!</strong></p>
+            
+            <div style="margin-top: 30px;">
+                <a href="short.html" class="btn" style="margin: 10px;">Quick Revision</a>
+                <a href="medium.html" class="btn" style="margin: 10px;">Detailed Learning</a>
+                <a href="long.html" class="btn" style="margin: 10px;">Master Guide</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add intersection observer for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureItems = document.querySelectorAll('.feature-item');
+            const versionCards = document.querySelectorAll('.version-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            featureItems.forEach(item => {
+                item.style.animationPlayState = 'paused';
+                observer.observe(item);
+            });
+            
+            versionCards.forEach(card => {
+                card.style.animationPlayState = 'paused';
+                observer.observe(card);
+            });
+
+            // Add click tracking for analytics
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const version = this.closest('.version-card') ? 
+                                  this.closest('.version-card').querySelector('.version-title').textContent : 
+                                  'Quick Start';
+                    console.log(`Navigating to: ${this.href} from ${version}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

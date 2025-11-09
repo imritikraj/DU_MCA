@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Statistics Notes</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #4a6491;
+            color: #2c3e50;
+        }
+        
+        h3 {
+            font-size: 1.6rem;
+            margin: 25px 0 15px;
+            color: #34495e;
+        }
+        
+        h4 {
+            font-size: 1.3rem;
+            margin: 20px 0 10px;
+            color: #4a6491;
+        }
+        
+        .topic-section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        }
+        
+        .definition-box {
+            background-color: #e8f4f8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid #2980b9;
+        }
+        
+        .formula-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+            overflow-x: auto;
+        }
+        
+        .example-container {
+            margin: 25px 0;
+        }
+        
+        .example {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .example.easy {
+            border-left-color: #2ecc71;
+        }
+        
+        .example.medium {
+            border-left-color: #f39c12;
+        }
+        
+        .example.hard {
+            border-left-color: #e74c3c;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            color: white;
+        }
+        
+        .easy-badge {
+            background-color: #2ecc71;
+        }
+        
+        .medium-badge {
+            background-color: #f39c12;
+        }
+        
+        .hard-badge {
+            background-color: #e74c3c;
+        }
+        
+        .note-box {
+            background-color: #fff3cd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid #ffc107;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #4a6491;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .visualization {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .visualization img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .caption {
+            font-style: italic;
+            margin-top: 10px;
+            color: #7f8c8d;
+        }
+        
+        .key-term {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .important {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            background-color: #f5f5f5;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .step {
+            margin-bottom: 10px;
+            display: flex;
+        }
+        
+        .step-number {
+            background-color: #9b59b6;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .summary {
+            background-color: #d5edf7;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .topic-section {
+                padding: 20px;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+            }
+        }
+        
+        .toc {
+            background-color: #eef2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+        }
+        
+        .toc ul {
+            columns: 2;
+            list-style-type: none;
+        }
+        
+        .toc li {
+            margin-bottom: 8px;
+        }
+        
+        .toc a {
+            text-decoration: none;
+            color: #2c3e50;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: #3498db;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        .back-to-top:hover {
+            background-color: #2980b9;
+        }
+
+           .instagram-container {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 12px 25px;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        
+        .instagram-container:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .instagram-icon {
+            font-size: 1.8rem;
+            margin-right: 12px;
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+        }
+        
+        .instagram-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .instagram-id {
+            font-weight: 700;
+            background: linear-gradient(45deg, #FFDC80, #FCAF45, #F77737, #F56040, #FD1D1D, #E1306C, #C13584, #833AB4, #5851DB, #405DE6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="back-to-top">↑</a>
+
+    <header>
+        <h1>Statistics Notes</h1>
+        <p class="subtitle">Complete Guide with Examples & Visualizations</p>
+       
+    </header>
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+            <li><a href="#central-tendency">1. Measures of Central Tendency</a></li>
+            <li><a href="#dispersion">2. Measures of Dispersion</a></li>
+            <li><a href="#skewness">3. Measures of Skewness</a></li>
+            <li><a href="#probability">4. Probability Theory</a></li>
+            <li><a href="#random-variables">5. Random Variables</a></li>
+            <li><a href="#data-representation">6. Data Representation</a></li>
+        </ul>
+    </div>
+
+    <div class="topic-section" id="central-tendency">
+        <h2>1. Measures of Central Tendency</h2>
+        
+        <div class="definition-box">
+            <p><span class="key-term">Central Tendency</span> is a statistical measure that identifies a single value as representative of an entire dataset. It indicates where the center of a distribution lies.</p>
+        </div>
+        
+        <h3>Types of Central Tendency Measures</h3>
+        <ul>
+            <li><span class="key-term">Arithmetic Mean (AM)</span> - The average of all values</li>
+            <li><span class="key-term">Median</span> - The middle value when data is ordered</li>
+            <li><span class="key-term">Mode</span> - The most frequently occurring value</li>
+            <li><span class="key-term">Geometric Mean (GM)</span> - The nth root of the product of values</li>
+            <li><span class="key-term">Harmonic Mean (HM)</span> - The reciprocal of the arithmetic mean of reciprocals</li>
+        </ul>
+        
+        <div class="visualization">
+            <img src="https://vula.uct.ac.za/access/content/group/9c29ba04-b1ee-49b9-8c85-9a468b556ce2/DOH/Module%202%20(Bio_Epi)/Biostatistics/BIOSTATISTICS/Graphics/bs1.4.gif" alt="Comparison of mean, median, and mode">
+            <p class="caption">Visual comparison of mean, median, and mode in different distribution shapes</p>
+        </div>
+        
+        <h3>Arithmetic Mean (\(\bar{X}\))</h3>
+        <div class="formula-box">
+            <p><strong>Ungrouped Data:</strong> \(\bar{X} = \frac{\sum_{i=1}^{n} x_i}{n}\)</p>
+            <p><strong>Grouped Data:</strong> \(\bar{X} = \frac{\sum_{i=1}^{k} f_i x_i}{\sum_{j=1}^{k} f_j}\)</p>
+            <p><strong>Weighted Mean:</strong> \(\bar{X}_w = \frac{\sum w_i x_i}{\sum w_i}\)</p>
+        </div>
+        
+        <div class="example-container">
+            <h4>Examples</h4>
+            
+            <div class="example easy">
+                <div class="example-title">
+                    Easy Example
+                    <span class="difficulty-badge easy-badge">Easy</span>
+                </div>
+                <p><strong>Problem:</strong> Find the mean of the following test scores: 85, 90, 78, 92, 88</p>
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>Sum all values: 85 + 90 + 78 + 92 + 88 = 433</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Divide by number of values: 433 ÷ 5 = 86.6</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div><strong>Answer:</strong> Mean = 86.6</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example medium">
+                <div class="example-title">
+                    Medium Example
+                    <span class="difficulty-badge medium-badge">Medium</span>
+                </div>
+                <p><strong>Problem:</strong> Calculate the weighted mean for a student with the following grades:</p>
+                <table>
+                    <tr><th>Subject</th><th>Grade</th><th>Credit Hours</th></tr>
+                    <tr><td>Math</td><td>85</td><td>4</td></tr>
+                    <tr><td>Science</td><td>92</td><td>3</td></tr>
+                    <tr><td>History</td><td>78</td><td>2</td></tr>
+                </table>
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>Multiply each grade by its weight: (85×4) + (92×3) + (78×2) = 340 + 276 + 156 = 772</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Sum the weights: 4 + 3 + 2 = 9</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>Divide: 772 ÷ 9 = 85.78</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div><strong>Answer:</strong> Weighted mean = 85.78</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example hard">
+                <div class="example-title">
+                    Hard Example
+                    <span class="difficulty-badge hard-badge">Hard</span>
+                </div>
+                <p><strong>Problem:</strong> Calculate the mean for the following grouped data:</p>
+                <table>
+                    <tr><th>Class Interval</th><th>Frequency</th></tr>
+                    <tr><td>0-10</td><td>5</td></tr>
+                    <tr><td>10-20</td><td>8</td></tr>
+                    <tr><td>20-30</td><td>12</td></tr>
+                    <tr><td>30-40</td><td>7</td></tr>
+                    <tr><td>40-50</td><td>3</td></tr>
+                </table>
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>Find midpoints of each class: 5, 15, 25, 35, 45</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Multiply midpoints by frequencies: (5×5) + (15×8) + (25×12) + (35×7) + (45×3) = 25 + 120 + 300 + 245 + 135 = 825</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>Sum frequencies: 5 + 8 + 12 + 7 + 3 = 35</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div>Divide: 825 ÷ 35 = 23.57</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div><strong>Answer:</strong> Mean = 23.57</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="note-box">
+            <p><span class="important">Note:</span> Median is often a better indicator than mean when:</p>
+            <ul>
+                <li>The dataset contains significant outliers</li>
+                <li>The distribution is highly skewed</li>
+                <li>You need a measure that's less affected by extreme values</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="topic-section" id="dispersion">
+        <h2>2. Measures of Dispersion</h2>
+        
+        <div class="definition-box">
+            <p><span class="key-term">Dispersion</span> measures how spread out the values in a dataset are. While central tendency tells us about the center, dispersion tells us about the spread.</p>
+        </div>
+        
+        <div class="visualization">
+            <img src="data:image/png;base64,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">
+            <p class="caption">Different distributions with the same mean but different dispersion</p>
+        </div>
+        
+        <h3>Range</h3>
+        <div class="formula-box">
+            <p>Range = Maximum value - Minimum value</p>
+        </div>
+        
+        <h3>Variance</h3>
+        <div class="formula-box">
+            <p><strong>Population Variance:</strong> \(\sigma^2 = \frac{\sum (x_i - \mu)^2}{N}\)</p>
+            <p><strong>Sample Variance:</strong> \(s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}\)</p>
+        </div>
+        
+        <h3>Standard Deviation</h3>
+        <div class="formula-box">
+            <p><strong>Population SD:</strong> \(\sigma = \sqrt{\frac{\sum (x_i - \mu)^2}{N}}\)</p>
+            <p><strong>Sample SD:</strong> \(s = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n-1}}\)</p>
+        </div>
+        
+        <div class="example-container">
+            <h4>Examples</h4>
+            
+            <div class="example easy">
+                <div class="example-title">
+                    Easy Example
+                    <span class="difficulty-badge easy-badge">Easy</span>
+                </div>
+                <p><strong>Problem:</strong> Find the range of: 12, 15, 18, 22, 25, 30</p>
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>Identify maximum value: 30</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Identify minimum value: 12</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>Calculate range: 30 - 12 = 18</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div><strong>Answer:</strong> Range = 18</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example medium">
+                <div class="example-title">
+                    Medium Example
+                    <span class="difficulty-badge medium-badge">Medium</span>
+                </div>
+                <p><strong>Problem:</strong> Calculate variance and standard deviation for: 5, 7, 9, 11, 13</p>
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>Calculate mean: (5+7+9+11+13)/5 = 45/5 = 9</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Find squared differences: (5-9)²=16, (7-9)²=4, (9-9)²=0, (11-9)²=4, (13-9)²=16</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>Sum squared differences: 16+4+0+4+16 = 40</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div>Variance (population): 40/5 = 8</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div>Standard deviation: √8 ≈ 2.83</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div><strong>Answer:</strong> Variance = 8, SD ≈ 2.83</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="summary">
+            <p><strong>Key Points:</strong></p>
+            <ul>
+                <li>Range is simple but sensitive to outliers</li>
+                <li>Variance measures average squared deviation from mean</li>
+                <li>Standard deviation is in the same units as the original data</li>
+                <li>For samples, we use n-1 in the denominator (Bessel's correction)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="topic-section" id="skewness">
+        <h2>3. Measures of Skewness</h2>
+        
+        <div class="definition-box">
+            <p><span class="key-term">Skewness</span> measures the asymmetry of a probability distribution. A symmetric distribution has skewness of zero.</p>
+        </div>
+        
+        <div class="visualization">
+            <img src="https://lh4.googleusercontent.com/1fxkutASvMzntLqWm_r7qUJjNnLrBrXAHt7eHoh8jZKE9VT9sTLvwELhA1PEJx6qxWW_eY9VKLRxMk3O-80JtBR3eny3moEUft0hKEzFYlIFzzu2idcdFFXJAj4KuY-9aMMiozUQiMFVPIXGFiICToI-zuQbT632Na4swz_WPD-_6RWHq9iX-NSH2A">
+            <p class="caption">Visual representation of positive skew (right-tailed), negative skew (left-tailed), and symmetric distributions</p>
+        </div>
+        
+        <h3>Pearson's Coefficient of Skewness</h3>
+        <div class="formula-box">
+            <p>\(Sk = \frac{3(\text{Mean} - \text{Median})}{\text{Standard Deviation}}\)</p>
+        </div>
+        
+        <div class="example-container">
+            <h4>Examples</h4>
+            
+            <div class="example easy">
+                <div class="example-title">
+                    Easy Example
+                    <span class="difficulty-badge easy-badge">Easy</span>
+                </div>
+                <p><strong>Problem:</strong> For a dataset with mean=50, median=45, and SD=10, calculate skewness</p>
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>Apply formula: Sk = 3(50-45)/10</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Calculate: 3×5/10 = 15/10 = 1.5</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div><strong>Answer:</strong> Skewness = 1.5 (positively skewed)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example medium">
+                <div class="example-title">
+                    Medium Example
+                    <span class="difficulty-badge medium-badge">Medium</span>
+                </div>
+                <p><strong>Problem:</strong> Interpret the following skewness values: -0.8, 0, 2.1</p>
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>Skewness = -0.8: Moderately negatively skewed (left-tailed)</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Skewness = 0: Symmetrical distribution</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>Skewness = 2.1: Highly positively skewed (right-tailed)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="note-box">
+            <p><span class="important">Interpretation Guide:</span></p>
+            <ul>
+                <li>Skewness between -0.5 and 0.5: Approximately symmetric</li>
+                <li>Skewness between -1 and -0.5 or 0.5 and 1: Moderately skewed</li>
+                <li>Skewness less than -1 or greater than 1: Highly skewed</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="topic-section" id="probability">
+        <h2>4. Probability Theory</h2>
+        
+        <div class="definition-box">
+            <p><span class="key-term">Probability</span> quantifies the likelihood of events occurring, ranging from 0 (impossible) to 1 (certain).</p>
+        </div>
+        
+        <h3>Basic Probability Rules</h3>
+        <div class="formula-box">
+            <p>\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</p>
+            <p>\(P(A^c) = 1 - P(A)\)</p>
+            <p>If A and B are mutually exclusive: \(P(A \cup B) = P(A) + P(B)\)</p>
+        </div>
+        
+        <div class="example-container">
+            <h4>Examples</h4>
+            
+            <div class="example easy">
+                <div class="example-title">
+                    Easy Example
+                    <span class="difficulty-badge easy-badge">Easy</span>
+                </div>
+                <p><strong>Problem:</strong> What's the probability of rolling an even number on a fair die?</p>
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>Even numbers on a die: 2, 4, 6 (3 outcomes)</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Total possible outcomes: 6</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>Probability = 3/6 = 1/2</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div><strong>Answer:</strong> P(even) = 0.5</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example medium">
+                <div class="example-title">
+                    Medium Example
+                    <span class="difficulty-badge medium-badge">Medium</span>
+                </div>
+                <p><strong>Problem:</strong> In a class, 30% of students take math, 25% take science, and 10% take both. What's the probability a randomly selected student takes math or science?</p>
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>P(Math) = 0.30, P(Science) = 0.25, P(Both) = 0.10</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Apply addition rule: P(Math ∪ Science) = 0.30 + 0.25 - 0.10</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>Calculate: 0.45</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div><strong>Answer:</strong> Probability = 0.45 or 45%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="topic-section" id="data-representation">
+        <h2>5. Data Representation</h2>
+        
+        <div class="definition-box">
+            <p><span class="key-term">Data representation</span> involves visualizing data through charts, graphs, and plots to reveal patterns, trends, and relationships.</p>
+        </div>
+        
+        <h3>Common Data Visualization Methods</h3>
+        <ul>
+            <li><span class="key-term">Histograms</span> - For frequency distributions</li>
+            <li><span class="key-term">Box plots</span> - For five-number summaries</li>
+            <li><span class="key-term">Scatter plots</span> - For relationships between variables</li>
+            <li><span class="key-term">Bar charts</span> - For categorical data</li>
+            <li><span class="key-term">Pie charts</span> - For proportional data</li>
+        </ul>
+        
+        <div class="visualization">
+            <img src="https://i.ytimg.com/vi/1MXcyrNkprk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLACg5zbNYvFMeLOVEh_IsHw1CgBnA">
+            <p class="caption">Examples of histogram, box plot, and scatter plot visualizations</p>
+        </div>
+        
+        <div class="example-container">
+            <h4>Examples</h4>
+            
+            <div class="example easy">
+                <div class="example-title">
+                    Easy Example
+                    <span class="difficulty-badge easy-badge">Easy</span>
+                </div>
+                <p><strong>Problem:</strong> Create a simple bar chart for favorite fruits among 20 people: Apples (8), Bananas (5), Oranges (7)</p>
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>Draw horizontal and vertical axes</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Label categories on horizontal axis: Apples, Bananas, Oranges</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>Scale vertical axis from 0 to 8</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div>Draw bars with heights: Apples=8, Bananas=5, Oranges=7</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="difficulty-badge easy-badge" href="midsem.html" >Mid Semester</a>
+    </div>
+        <a href="https://www.instagram.com/lord_ritik07/" target="_blank" class="instagram-container">
+                <i class="fab fa-instagram instagram-icon"></i>
+                <span class="instagram-text">Follow me: <span class="instagram-id">@lord_ritik07</span></span>
+            </a>
+    
+
+    <script>
+        // Back to top button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.style.display = 'flex';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Make formulas render properly with MathJax
+            if (window.MathJax) {
+                window.MathJax.typesetPromise();
+            }
+            
+            // Smooth scrolling for table of contents links
+            document.querySelectorAll('.toc a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

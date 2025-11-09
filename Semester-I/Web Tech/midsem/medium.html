@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete HTML & CSS Revision Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 6px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+        }
+
+        .question {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .question::before {
+            content: '❓';
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        .answer {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .answer ul, .answer ol {
+            margin: 15px 0 15px 25px;
+        }
+
+        .answer li {
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+
+        .answer strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .code {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .topic-section {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .topic-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .topic-title::before {
+            content: '📁';
+            font-size: 1.5em;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 30px 20px;
+            margin-top: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: var(--primary);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0 5px 10px 0;
+        }
+
+        .badge-html { background: #e34f26; }
+        .badge-css { background: #1572b6; }
+        .badge-js { background: #f7df1e; color: black; }
+        .badge-advanced { background: var(--secondary); }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .topic-section {
+                padding: 25px;
+            }
+            
+            .nav {
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .answer {
+                font-size: 0.95rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stagger animation delays */
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+
+        .highlight {
+            background: linear-gradient(120deg, var(--accent) 0%, var(--accent) 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.2em;
+            background-position: 0 88%;
+            transition: background-size 0.3s ease;
+        }
+
+        .tip {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip::before {
+            content: '💡 ';
+            font-weight: bold;
+            color: var(--warning);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Complete HTML & CSS Revision Guide</h1>
+            <p>Detailed answers with examples • Perfect for interviews & quick revision • Fully responsive design</p>
+            
+            <div class="nav">
+                <button class="nav-btn active" onclick="filterCards('all')">All Topics</button>
+                <button class="nav-btn" onclick="filterCards('html')">HTML</button>
+                <button class="nav-btn" onclick="filterCards('css')">CSS</button>
+                <button class="nav-btn" onclick="filterCards('advanced')">Advanced</button>
+            </div>
+        </div>
+
+        <!-- HTML Questions -->
+        <div class="topic-section" data-category="html">
+            <h2 class="topic-title">HTML Fundamentals</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="question">What is HTML and how does it differ from CSS and JavaScript?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">HTML</span>
+                        <strong>HTML (HyperText Markup Language)</strong> is the standard markup language for creating web pages. It provides the structure and content of a webpage.
+                        
+                        <div class="tip">Think of HTML as the skeleton of a webpage.</div>
+                        
+                        <strong>Key Differences:</strong>
+                        <ul>
+                            <li><strong>HTML:</strong> Structure and content (headings, paragraphs, images)</li>
+                            <li><strong>CSS:</strong> Presentation and styling (colors, layout, fonts)</li>
+                            <li><strong>JavaScript:</strong> Behavior and interactivity (animations, form validation)</li>
+                        </ul>
+                        
+                        <div class="code">
+                            &lt;!-- HTML --&gt;<br>
+                            &lt;h1&gt;Welcome&lt;/h1&gt;<br>
+                            &lt;!-- CSS makes it blue --&gt;<br>
+                            &lt;!-- JavaScript makes it interactive --&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What are HTML5 Semantic Elements and why are they important?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">HTML5</span>
+                        <strong>Semantic elements</strong> clearly describe their meaning to both browser and developer.
+                        
+                        <strong>Common Semantic Elements:</strong>
+                        <ul>
+                            <li><code>&lt;header&gt;</code> - Introductory content</li>
+                            <li><code>&lt;nav&gt;</code> - Navigation links</li>
+                            <li><code>&lt;main&gt;</code> - Main content area</li>
+                            <li><code>&lt;article&gt;</code> - Self-contained content</li>
+                            <li><code>&lt;section&gt;</code> - Thematic grouping</li>
+                            <li><code>&lt;aside&gt;</code> - Sidebar content</li>
+                            <li><code>&lt;footer&gt;</code> - Footer content</li>
+                        </ul>
+                        
+                        <strong>Benefits:</strong>
+                        <ul>
+                            <li>Better SEO (search engines understand content)</li>
+                            <li>Improved accessibility (screen readers)</li>
+                            <li>Cleaner, more readable code</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What is the purpose of the DOCTYPE declaration?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">DOCTYPE</span>
+                        The <strong>DOCTYPE declaration</strong> tells the browser which version of HTML the page is written in and triggers standards mode rendering.
+                        
+                        <div class="code">
+                            &lt;!DOCTYPE html&gt;  &lt;!-- HTML5 DOCTYPE --&gt;
+                        </div>
+                        
+                        <strong>Why it's essential:</strong>
+                        <ul>
+                            <li>Prevents <strong>quirks mode</strong> (old, inconsistent rendering)</li>
+                            <li>Ensures consistent rendering across browsers</li>
+                            <li>Required for valid HTML documents</li>
+                        </ul>
+                        
+                        <div class="tip">Without DOCTYPE, browsers may render pages in unexpected ways!</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What's the difference between ID and Class attributes?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">Attributes</span>
+                        <strong>ID Attribute:</strong>
+                        <ul>
+                            <li>Unique identifier for a single element</li>
+                            <li>CSS selector: <code>#id-name</code></li>
+                            <li>Used for: JavaScript targeting, page anchors</li>
+                            <li>High CSS specificity</li>
+                        </ul>
+                        
+                        <strong>Class Attribute:</strong>
+                        <ul>
+                            <li>Reusable identifier for multiple elements</li>
+                            <li>CSS selector: <code>.class-name</code></li>
+                            <li>Used for: Styling groups of elements</li>
+                            <li>Medium CSS specificity</li>
+                        </ul>
+                        
+                        <div class="code">
+                            &lt;div id="header" class="container primary"&gt;Content&lt;/div&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What's the difference between &lt;div&gt; and &lt;span&gt; elements?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">Elements</span>
+                        <strong>&lt;div&gt; (Division):</strong>
+                        <ul>
+                            <li><strong>Block-level</strong> element</li>
+                            <li>Starts on a new line, takes full width</li>
+                            <li>Used for layout and grouping block elements</li>
+                            <li>Accepts width, height, margins, padding</li>
+                        </ul>
+                        
+                        <strong>&lt;span&gt;:</strong>
+                        <ul>
+                            <li><strong>Inline-level</strong> element</li>
+                            <li>Flows with text, takes only necessary width</li>
+                            <li>Used for styling parts of text</li>
+                            <li>Ignores width and height properties</li>
+                        </ul>
+                        
+                        <div class="code">
+                            &lt;div&gt;This is a block element&lt;/div&gt;<br>
+                            This text has a &lt;span style="color: red;"&gt;red span&lt;/span&gt; inside.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">How do HTML Forms work and what are common input types?</div>
+                    <div class="answer">
+                        <span class="badge badge-html">Forms</span>
+                        <strong>HTML Forms</strong> collect user input and send it to a server for processing.
+                        
+                        <strong>Common Input Types:</strong>
+                        <ul>
+                            <li><code>text</code> - Single-line text input</li>
+                            <li><code>password</code> - Masked text input</li>
+                            <li><code>email</code> - Email validation</li>
+                            <li><code>number</code> - Numeric input</li>
+                            <li><code>date</code> - Date picker</li>
+                            <li><code>radio</code> - Single selection</li>
+                            <li><code>checkbox</code> - Multiple selection</li>
+                            <li><code>submit</code> - Form submission button</li>
+                        </ul>
+                        
+                        <div class="code">
+                            &lt;form action="/submit" method="POST"&gt;<br>
+                            &nbsp;&nbsp;&lt;input type="text" name="username" required&gt;<br>
+                            &nbsp;&nbsp;&lt;input type="submit" value="Send"&gt;<br>
+                            &lt;/form&gt;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSS Questions -->
+        <div class="topic-section" data-category="css">
+            <h2 class="topic-title">CSS Fundamentals</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="question">What is the CSS Box Model and how does it work?</div>
+                    <div class="answer">
+                        <span class="badge badge-css">Box Model</span>
+                        The <strong>CSS Box Model</strong> describes how every element is represented as a rectangular box with four areas:
+                        
+                        <ul>
+                            <li><strong>Content:</strong> Actual text/images (innermost)</li>
+                            <li><strong>Padding:</strong> Space around content (inside border)</li>
+                            <li><strong>Border:</strong> Line surrounding padding</li>
+                            <li><strong>Margin:</strong> Space between elements (outside border)</li>
+                        </ul>
+                        
+                        <strong>Box-Sizing Property:</strong>
+                        <ul>
+                            <li><code>content-box</code> (default) - Width/height apply to content only</li>
+                            <li><code>border-box</code> - Width/height include content + padding + border</li>
+                        </ul>
+                        
+                        <div class="tip">Always use <code>box-sizing: border-box</code> for predictable layouts!</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What's the difference between display: inline and display: block?</div>
+                    <div class="answer">
+                        <span class="badge badge-css">Display</span>
+                        <strong>display: inline</strong>
+                        <ul>
+                            <li>Flows within text content</li>
+                            <li>Ignores width and height properties</li>
+                            <li>No line breaks before/after</li>
+                            <li>Examples: <code>&lt;span&gt;, &lt;a&gt;, &lt;strong&gt;</code></li>
+                        </ul>
+                        
+                        <strong>display: block</strong>
+                        <ul>
+                            <li>Creates rectangular blocks</li>
+                            <li>Accepts width and height properties</li>
+                            <li>Starts on a new line</li>
+                            <li>Examples: <code>&lt;div&gt;, &lt;p&gt;, &lt;h1&gt;</code></li>
+                        </ul>
+                        
+                        <strong>display: inline-block</strong> - Hybrid: flows like inline but accepts dimensions like block.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">How does the CSS position property work?</div>
+                    <div class="answer">
+                        <span class="badge badge-css">Position</span>
+                        <strong>position: static</strong> - Default, normal document flow
+                        <br><br>
+                        <strong>position: relative</strong> - Positions relative to its normal position
+                        <div class="code">
+                            .element {<br>
+                            &nbsp;&nbsp;position: relative;<br>
+                            &nbsp;&nbsp;top: 20px;<br>
+                            &nbsp;&nbsp;left: 10px;<br>
+                            }
+                        </div>
+                        
+                        <strong>position: absolute</strong> - Removed from flow, positioned relative to nearest positioned ancestor
+                        <br><br>
+                        <strong>position: fixed</strong> - Relative to viewport, stays during scrolling
+                        <br><br>
+                        <strong>position: sticky</strong> - Hybrid of relative and fixed
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What's the difference between margin and padding?</div>
+                    <div class="answer">
+                        <span class="badge badge-css">Spacing</span>
+                        <strong>Padding:</strong>
+                        <ul>
+                            <li>Space <strong>inside</strong> the element, between content and border</li>
+                            <li>Background color extends into padding</li>
+                            <li>Does NOT collapse</li>
+                            <li>Use for: Internal spacing within components</li>
+                        </ul>
+                        
+                        <strong>Margin:</strong>
+                        <ul>
+                            <li>Space <strong>outside</strong> the element, between elements</li>
+                            <li>Transparent (no background)</li>
+                            <li>Vertical margins collapse (only larger margin applies)</li>
+                            <li>Use for: External spacing between components</li>
+                        </ul>
+                        
+                        <div class="code">
+                            .box {<br>
+                            &nbsp;&nbsp;padding: 20px;  /* Internal space */<br>
+                            &nbsp;&nbsp;margin: 30px;   /* External space */<br>
+                            &nbsp;&nbsp;border: 2px solid black;<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What is the purpose of the z-index property?</div>
+                    <div class="answer">
+                        <span class="badge badge-css">z-index</span>
+                        The <strong>z-index</strong> property controls the stacking order of positioned elements along the z-axis (depth).
+                        
+                        <strong>How it works:</strong>
+                        <ul>
+                            <li>Higher z-index = closer to user (in front)</li>
+                            <li>Lower z-index = further from user (behind)</li>
+                            <li>Negative values = behind normal content</li>
+                            <li>Only works on <strong>positioned</strong> elements</li>
+                        </ul>
+                        
+                        <div class="code">
+                            .modal {<br>
+                            &nbsp;&nbsp;position: fixed;<br>
+                            &nbsp;&nbsp;z-index: 1000;  /* High = in front */<br>
+                            }<br>
+                            .backdrop {<br>
+                            &nbsp;&nbsp;position: fixed;<br>
+                            &nbsp;&nbsp;z-index: 999;   /* Lower = behind */<br>
+                            }
+                        </div>
+                        
+                        <div class="tip">z-index only works within the same stacking context!</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What is CSS Specificity and how does it work?</div>
+                    <div class="answer">
+                        <span class="badge badge-css">Specificity</span>
+                        <strong>CSS Specificity</strong> determines which CSS rules are applied when multiple rules target the same element.
+                        
+                        <strong>Specificity Hierarchy (high to low):</strong>
+                        <ol>
+                            <li>Inline styles (<code>style=""</code>)</li>
+                            <li>ID selectors (<code>#id</code>)</li>
+                            <li>Class/attribute/pseudo-class selectors</li>
+                            <li>Element/pseudo-element selectors</li>
+                        </ol>
+                        
+                        <strong>Calculation:</strong>
+                        <ul>
+                            <li>Inline: 1000 points</li>
+                            <li>ID: 100 points</li>
+                            <li>Class: 10 points</li>
+                            <li>Element: 1 point</li>
+                        </ul>
+                        
+                        <div class="code">
+                            #header .nav li a { }  /* 100 + 10 + 1 + 1 = 112 */<br>
+                            .nav li.active a { }   /* 10 + 1 + 10 + 1 = 22 */<br>
+                            /* First rule wins! */
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Topics -->
+        <div class="topic-section" data-category="advanced">
+            <h2 class="topic-title">Advanced Concepts</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="question">CSS Grid vs Flexbox - When to use which?</div>
+                    <div class="answer">
+                        <span class="badge badge-advanced">Layout</span>
+                        <strong>CSS Grid:</strong>
+                        <ul>
+                            <li><strong>2-dimensional</strong> layout (rows + columns simultaneously)</li>
+                            <li>Container-based control</li>
+                            <li>Perfect for: Overall page layout, complex grids</li>
+                            <li>Use when you need control over both axes</li>
+                        </ul>
+                        
+                        <strong>Flexbox:</strong>
+                        <ul>
+                            <li><strong>1-dimensional</strong> layout (row OR column)</li>
+                            <li>Item-based flexibility</li>
+                            <li>Perfect for: Component layout, content distribution</li>
+                            <li>Use when layout is in one direction</li>
+                        </ul>
+                        
+                        <div class="tip">Use Grid for big picture layout, Flexbox for component layout!</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What are Media Queries and how are they used for responsive design?</div>
+                    <div class="answer">
+                        <span class="badge badge-advanced">Responsive</span>
+                        <strong>Media Queries</strong> apply different CSS styles based on device characteristics like screen width.
+                        
+                        <strong>Common Breakpoints:</strong>
+                        <ul>
+                            <li>Mobile: < 768px</li>
+                            <li>Tablet: 768px - 1024px</li>
+                            <li>Desktop: > 1024px</li>
+                        </ul>
+                        
+                        <div class="code">
+                            /* Mobile First Approach */<br>
+                            .container { padding: 1rem; }<br><br>
+                            
+                            /* Tablet */<br>
+                            @media (min-width: 768px) {<br>
+                            &nbsp;&nbsp;.container { max-width: 720px; }<br>
+                            }<br><br>
+                            
+                            /* Desktop */<br>
+                            @media (min-width: 1024px) {<br>
+                            &nbsp;&nbsp;.container { max-width: 960px; }<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="question">What are CSS Preprocessors and why use SASS/LESS?</div>
+                    <div class="answer">
+                        <span class="badge badge-advanced">Preprocessors</span>
+                        <strong>CSS Preprocessors</strong> extend CSS with programming features and compile to regular CSS.
+                        
+                        <strong>Key SASS Features:</strong>
+                        <ul>
+                            <li><strong>Variables:</strong> Store colors, fonts for reuse</li>
+                            <li><strong>Nesting:</strong> Hierarchical organization</li>
+                            <li><strong>Mixins:</strong> Reusable code blocks</li>
+                            <li><strong>Functions:</strong> Mathematical operations</li>
+                            <li><strong>Import:</strong> Modular file structure</li>
+                        </ul>
+                        
+                        <div class="code">
+                            // SASS Variables<br>
+                            $primary-color: #3498db;<br>
+                            $spacing: 1rem;<br><br>
+                            
+                            .button {<br>
+                            &nbsp;&nbsp;background: $primary-color;<br>
+                            &nbsp;&nbsp;padding: $spacing;<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 <strong>Perfect for interviews & quick revision</strong> • 📱 <strong>Fully responsive design</strong> • ⚡ <strong>Detailed explanations with examples</strong></p>
+            <p>Bookmark this page and revisit before interviews or when you need a quick refresher!</p>
+        </div>
+    </div>
+
+    <script>
+        function filterCards(category) {
+            const sections = document.querySelectorAll('.topic-section');
+            const buttons = document.querySelectorAll('.nav-btn');
+            
+            // Update active button
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(category)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Show/hide sections
+            sections.forEach(section => {
+                if (category === 'all' || section.dataset.category === category) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Add scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            cards.forEach(card => {
+                card.style.animationPlayState = 'paused';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
